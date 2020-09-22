@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>World of Warcraft Quiz</title>
+    <title>Final Fantasy X Quiz</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     <!-- main start -->
     <header>
         <h4 style="left: 5%; top: 2%; position: fixed;" id="highScore">View High Scores!</section>
-        <h4 style="right: 5%; top: 2%; position: fixed;" id="timer">60</section>
+        <h4 style="right: 5%; top: 2%; position: fixed;" id="timer"></section>
     </header>
     <main class="container">
         
@@ -53,16 +53,17 @@
                     <button id="start" type="button" class="btn btn-secondary">Start</button>
                     <div id="buttons" class="col-lg-10">
                         <div>
-                            <button id="answer1" type="button" class="btn btn-secondary">1</button>
+                            <button id="1" type="button" value = 1 onclick="testClick(this.id)" class="btn btn-secondary">1</button>
                             <div class="p-1"></div>
-                            <button id="answer2" type="button" class="btn btn-secondary">2</button>
+                            <button id="2" type="button" value = 2 onclick="testClick(this.id)" class="btn btn-secondary">2</button>
                             <div class="p-1"></div>
-                            <button id="answer3" type="button" class="btn btn-secondary">3</button>
+                            <button id="3" type="button" value = 3 onclick="testClick(this.id)" class="btn btn-secondary">3</button>
                             <div class="p-1"></div>
-                            <button id="answer4" type="button" class="btn btn-secondary">4</button>
-                            <div class="p-3"></div>
+                            <button id="4" type="button" value = 4 onclick="testClick(this.id)" class="btn btn-secondary">4</button>
+                            <div class="pb-3"></div>
                             <div id="checker">correct/wrong</div>
                         </div>
+                        <div id="Scores"><ul></ul></div>
                     </div>
                 </div>
             </fieldset>

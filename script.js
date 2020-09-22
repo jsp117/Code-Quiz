@@ -1,99 +1,235 @@
 // declarations
-var displayStart = document.getElementById("buttons");
-var startQuiz = document.getElementById("start");
-var question = document.getElementById("questions");
-var answer1 = document.getElementById("answer1");
-var answer2 = document.getElementById("answer2");
-var answer3 = document.getElementById("answer3");
-var answer4 = document.getElementById("answer4");
-var possible = [];
+const displayStart = document.getElementById("buttons");
+const startQuiz = document.getElementById("start");
+const question = document.getElementById("questions");
+const answer1 = document.getElementById("1");
+const answer2 = document.getElementById("2");
+const answer3 = document.getElementById("3");
+const answer4 = document.getElementById("4");
+var text = document.getElementById("questionText");
+let possible = [];
+// var answerId = "";
+let i = 0;
 
-
-
-var questions = ["question 1", "question 2", "question 3"];
-var answers = ["answer 1", "answer 2", "answer 3", "answer 4", "answer 5", "answer 6", "answer 7", "answer 8", "answer 9",];
-var correct = ["correct 1", "correct 2", "correct 3"];
+const questions = ["question 1", "question 2", "question 3"];
+const answers = ["answer 1", "answer 2", "answer 3", "answer 4", "answer 5", "answer 6", "answer 7", "answer 8", "answer 9",];
+const correct = ["correct 1", "correct 2", "correct 3"];
 
 var score = 0;
-
-
+var seconds = 180;
+var timeLeft;
 // hide all buttons until start
 displayStart.style.display = "none";
+var x = 0;
 
 
-
-function start() {
+function start(check) {
     // show all buttons
     displayStart.style.display = "block";
+    text.style.display = "none";
     document.getElementById("start").style.display = "none";
-    document.getElementById("questionText").style.display = "none";
-   
+    // document.getElementById("questionText").style.display = "none";
+    
     // call timer
-    timer();
+    var timeleft = timer(seconds);
     // call questionAnswer - show button text from object
-    questionAnswer();
 
-    document.getElementById("checker").textContent = score;
+    // trying to get this 
+    
+    //  for (let i = 0; i < 10; i++) {
+        console.log("x = " + x);
+        console.log("this is check: " + check);
+        var ans = displayQA(x);
+        console.log("the correct answer is: " + ans);
+        console.log("container passed out = " + possible);
 
-    // start timer
-}
+        // doesnt work
+        // var answerId = document.getElementById(check);
+        // console.log("MY FINAL ANSWER IS: " + answerId);
 
-// function to display question and answers
-function questionAnswer() {
-    var i = 0;
-    do {
+        // var check = checkAnswer(possible);
+        x++;
+        if (check.textContent == ans) {
+            document.getElementById("checker").textContent = "Correct!";
+        }
         
-        
-        let q = 0;
-        let a = 0;
-        var x = Math.floor(Math.random() * 4);
-        possible.push(answers[q]);
-        possible.push(answers[q+1]);
-        possible.push(answers[q+2]);
-        possible.push(correct[a]);
+        // else {
+        //     timeLeft = timeLeft - 5;
+        //     seconds = timeLeft;
+        //     document.getElementById("checker").textContent = "Incorrect!";
+        // }
 
-        console.log(possible);
-
-        // shuffle possible
-        for (let i = 0; i < possible.length; i++) {
-            var x = Math.floor(Math.random() * i);
-            var y = possible[i];
-            console.log("variable stored = " + y);
-            possible[i] = possible[x];
-            console.log("first swap = " + possible[i]);
-            possible[x] = y;
-            console.log("second swap = " + possible[x]);
-            console.log("password after swaps = " + possible);
+        // if you run out of time
+        if(timeLeft < 1){
+            highScores(timeLeft);
+        }
+        // if you answer all questions
+        if(x == 10){
+            highScores(timeLeft);
         }
 
-        console.log(possible);
+// for loop close
+    //  }
+}
+    
+// function to display question and answers
+function displayQA(num) {
+    // do {
+    possible.length = 0;
+    // var clickOne = "";
+    // var clickTwo = "";
+    // var clickThree = "";
+    // var clickFour = "";
+    // let q = 0;
+    // let a = 0;
+    // var x = Math.floor(Math.random() * 4);
+    possible.push(answers[num]);
+    possible.push(answers[num + 1]);
+    possible.push(answers[num + 2]);
+    possible.push(correct[num]);
+    console.log("original possible container = " + possible);
 
+    // console.log(possible);
 
+    // shuffle possible array
+    for (let i = 0; i < possible.length; i++) {
+        var x = Math.floor(Math.random() * i);
+        var y = possible[i];
+        // console.log("variable stored = " + y);
+        possible[i] = possible[x];
+        // console.log("first swap = " + possible[i]);
+        possible[x] = y;
+        // console.log("second swap = " + possible[x]);
+        // console.log("password after swaps = " + possible);
+    }
 
-        question.textContent = questions[q];
-        answer1.textContent = possible[0];
-        answer2.textContent = possible[1];
-        answer3.textContent = possible[2];
-        answer4.textContent = possible[3];
+    // write question and shuffled answers to page
+    question.textContent = questions[num];
+    answer1.textContent = possible[0];
+    answer2.textContent = possible[1];
+    answer3.textContent = possible[2];
+    answer4.textContent = possible[3];
+    console.log("question is: " + questions[i]);
+    // prepare for next set of questions
+    // q = q + 1;
+    // a = a + 4;
+    // i = i + 1;    
+    console.log("possible container" + possible);
+    
+    return correct[num];
+}
 
-        q = q + 1;
-        a = a + 4;
-        i = i + 1;
-        possible.length = 0;
+// trying to get this function to take textContent of whichever id is pressed and return it
 
+// gets id of button pressed
+function testClick(clicked_id) {
+    var currentValue = clicked_id;
+    var convert = parseInt(currentValue);
+    var final = JSON.stringify(convert);
+    // console.log("text content of final = " + final.textContent);
+    var almost = ("answer" + final);
+    console.log("almost there... " + almost);
+    // console.log(almost.textContent);
+    // console.log("this is my answer + " + final);
+    // console.log("THIS IS THE ID " + currentValue);
+    // localStorage.setItem("Id", currentValue);
+    start(final);
+    // console.log("this is the answer you selected: " + currentValue.textContent);
+}
 
-        // if correct object is selected, score++, if incorrect, seconds - 5, then go to next question
+// function to show high scores and retain memory of top 10 winners
 
-
-    } while (i < 10)
-    return score;
+function highScores(){
+    displayStart.style.display = "none";
+    question.textContent = "High Scores: ";
+    // text.style.display = "block";
+    // text.textContent = "High Scores List";
 }
 
 
-// function called when user clicks an answer button
-// function answerClick() {
+
+
+// function checkAnswer(check){
+//     if(check.textContent = correct[i]){
+
+//     }
+//  return;
+// }
+
+
+
+    // get answerId from function answerClick
+
+    // answer1.addEventListener("click", answerClick);
+    // answer2.addEventListener("click", answerClick);
+    // answer3.addEventListener("click", answerClick);
+    // answer4.addEventListener("click", answerClick);
+
+    
+
+
+    // pull id from local storage
+    // var test = localStorage.getItem("Id");
+    // console.log("New Test ID = " + test);
+    // answerId = test.textContent;
+    // console.log("answer id = : " + answerId);
+
+
+    // end of original QuestionAnswer function
+    
+
+
+    // if correct object is selected, score++, if incorrect, seconds - 5, then go to next question
+
+
+    // } while (i < 10);
+   
+
+
+
+// var currentValue = 0;
+// // function called when user clicks an answer button
+// function answerClick(clicked_id) {
+//     answerId = "";
+//     currentValue = clicked_id;
+//     console.log("THIS is THE NEW Id:  " + currentValue);
+//     event.preventDefault();
+//     answerId = answer1.textContent;
+//     console.log(answerId);
+//     // i++;
+//     return answerId;
 
 // }
+
+// function answerClick2(event) {
+//     answerId = "";
+//     event.preventDefault();
+//     answerId = answer2.textContent;
+//     console.log(answerId);
+//     // i++;
+//     return answerId;
+// }
+
+// function answerClick3(event) {
+//     answerId = "";
+//     event.preventDefault();
+//     answerId = answer3.textContent;
+//     console.log(answerId);
+//     // i++;
+//     return answerId;
+// }
+
+// function answerClick4(event) {
+//     answerId = "";
+//     event.preventDefault();
+//     answerId = answer4.textContent;
+//     console.log(answerId);
+//     // i++;
+//     return answerId;
+// }
+
+// answerId = event.target.parentElement.id; cant get to work
+
 
 // function startTimer() {
 //     seconds = 10;
@@ -111,8 +247,8 @@ function questionAnswer() {
 //     }
 // }
 
-function timer() {
-    var seconds = 180;
+function timer(seconds) {
+    var timeElapsed = 0;
     function time() {
         var timer = document.getElementById("timer");
         seconds--;
@@ -121,7 +257,7 @@ function timer() {
             setTimeout(time, 1000);
         } else {
             alert("Time's up!");
-            finalScore();
+            return seconds;
         }
     }
     time();
@@ -129,10 +265,7 @@ function timer() {
 
 
 startQuiz.addEventListener("click", start);
-// answer1.addEventListener("click", answerClick);
-// answer2.addEventListener("click", answerClick);
-// answer3.addEventListener("click", answerClick);
-// answer4.addEventListener("click", answerClick);
+
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
