@@ -1,25 +1,86 @@
+// declarations
+var displayStart = document.getElementById("buttons");
+var startQuiz = document.getElementById("start");
+var question = document.getElementById("questions");
+var answer1 = document.getElementById("answer1");
+var answer2 = document.getElementById("answer2");
+var answer3 = document.getElementById("answer3");
+var answer4 = document.getElementById("answer4");
 
-var button1 = document.getElementById("buttons");
-button1.style.display="none";
-
-var test = document.querySelector("#checker");
-
-answer1.value.style.color="blue";
-
-// var button1 = document.getElementById("answer1");
-// var button1 = document.getElementById("answer1");
-// var button1 = document.getElementById("answer1");
-
-// On Start - initialize 1 minute timer - display top right corner
-
-// create/show 3 more buttons
-// 
-// change text of header ID = questions and buttons ID = answer1-4 to answers
+var qa = {
+    questions: ["question 1", "question 2", "question 3"],
+    answers: ["answer 1", "answer 2", "answer 3", "answer 4", "answer 5", "answer 6", "answer 7", "answer 8", "answer 9",],
+    correct: ["correct 1", "correct 2", "correct 3"];
+};
+var score = 0;
 
 
+// hide all buttons until start
+displayStart.style.display = "none";
 
 
 
+function start() {
+    // show all buttons
+    displayStart.style.display = "block";
+    document.getElementById("start").style.display = "none";
+    document.getElementById("questionText").style.display = "none";
+   
+    // call timer
+    timer();
+    // call questionAnswer - show button text from object
+    questionAnswer();
+
+    document.getElementById("checker").textContent = score;
+
+    // start timer
+
+
+}
+// function to display question and answers
+function questionAnswer() {
+    do {
+        let q = 0;
+        let a = 0;
+        question.textContent = qa.questions[q];
+        answer1.textContent = qa.answers[a];
+        answer2.textContent = qa.answers[a + 1];
+        answer3.textContent = qa.answers[a + 2];
+        answer4.textContent = qa.correct[a + 3];
+        q = q + 1;
+        a = a + 4;
+
+        
+
+
+        // if correct object is selected, score++, if incorrect, seconds - 5, then go to next question
+
+
+    } while (i < 10)
+    return score;
+}
+
+
+// function called when user clicks an answer button
+function answerClick() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+startQuiz.addEventListener("click", start);
+answer1.addEventListener("click", answerClick);
+answer2.addEventListener("click", answerClick);
+answer3.addEventListener("click", answerClick);
+answer4.addEventListener("click", answerClick);
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
