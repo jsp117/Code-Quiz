@@ -11,9 +11,9 @@ let possible = [];
 // var answerId = "";
 let i = 0;
 
-const questions = ["question 1", "question 2", "question 3"];
+const questions = ["question 1", "question 2", "question 3", "question 4", "question 5", "question 6", "question 7", "question 8", "question 9", "question 10"];
 const answers = ["answer 1", "answer 2", "answer 3", "answer 4", "answer 5", "answer 6", "answer 7", "answer 8", "answer 9",];
-const correct = ["correct 1", "correct 2", "correct 3"];
+const correct = ["correct 1", "correct 2", "correct 3", "correct 4", "correct 5", "correct 6", "correct 7", "correct 8", "correct 9", "correct 10"];
 
 var score = 0;
 var seconds = 180;
@@ -21,6 +21,7 @@ var timeLeft;
 // hide all buttons until start
 displayStart.style.display = "none";
 var x = 0;
+var answer = true;
 
 
 function start(check) {
@@ -29,50 +30,66 @@ function start(check) {
     text.style.display = "none";
     document.getElementById("start").style.display = "none";
     // document.getElementById("questionText").style.display = "none";
-    
+    console.log("start #: " + x);
+
     // call timer
     var timeleft = timer(seconds);
+    displayQA(x);
     // call questionAnswer - show button text from object
 
     // trying to get this 
-    
+
     //  for (let i = 0; i < 10; i++) {
-        console.log("x = " + x);
-        console.log("this is check: " + check);
-        var ans = displayQA(x);
-        console.log("the correct answer is: " + ans);
-        console.log("container passed out = " + possible);
+    console.log("x = " + x);
+    console.log("this is check: " + check);
+    // starting at 0, calls function with the number x
+    var ans = correct[x];
+    console.log("the correct answer is: " + ans);
+    console.log("container passed out = " + possible);
 
-        // doesnt work
-        // var answerId = document.getElementById(check);
-        // console.log("MY FINAL ANSWER IS: " + answerId);
+    // doesnt work
+    // var answerId = document.getElementById(check);
+    // console.log("MY FINAL ANSWER IS: " + answerId);
 
-        // var check = checkAnswer(possible);
-        x++;
-        if (check.textContent == ans) {
+    // var check = checkAnswer(possible);
+
+    // TODO - find a way to take textContent of clicked button
+    // figure out how to test check variable against correct answer from array
+    if (x > 0) {
+        answer = checkAnswer(check, ans);
+
+        document.getElementById("checker").textContent = "Correct!";
+        if (answer) {
             document.getElementById("checker").textContent = "Correct!";
         }
-        
-        // else {
-        //     timeLeft = timeLeft - 5;
-        //     seconds = timeLeft;
-        //     document.getElementById("checker").textContent = "Incorrect!";
-        // }
-
-        // if you run out of time
-        if(timeLeft < 1){
-            highScores(timeLeft);
+        else {
+            document.getElementById("checker").textContent = "Incorrect!";
+            seconds = seconds - 5;
         }
-        // if you answer all questions
-        if(x == 10){
-            highScores(timeLeft);
-        }
+    }
+    // if (check == ans) {
+    //     document.getElementById("checker").textContent = "Correct!";
+    // }
 
-// for loop close
-    //  }
+    // else {
+    //     timeLeft = timeLeft - 5;
+    //     seconds = timeLeft;
+    //     document.getElementById("checker").textContent = "Incorrect!";
+    // }
+
+    // if you run out of time
+    if (timeLeft < 1) {
+        highScores(timeLeft);
+    }
+    // if you answer all questions
+    if (x == 10) {
+        highScores(timeLeft);
+    }
+
+    x++;
 }
-    
-// function to display question and answers
+
+// function to display question and answers with the index of x from above (num here)
 function displayQA(num) {
     // do {
     possible.length = 0;
@@ -102,6 +119,7 @@ function displayQA(num) {
         // console.log("second swap = " + possible[x]);
         // console.log("password after swaps = " + possible);
     }
+    // console.log("possible after swaps = " + possible);
 
     // write question and shuffled answers to page
     question.textContent = questions[num];
@@ -115,46 +133,92 @@ function displayQA(num) {
     // a = a + 4;
     // i = i + 1;    
     console.log("possible container" + possible);
-    
+
     return correct[num];
 }
 
-// trying to get this function to take textContent of whichever id is pressed and return it
+// WORKING TEXT CONTENT GRABBER on click
 
-// gets id of button pressed
-function testClick(clicked_id) {
-    var currentValue = clicked_id;
-    var convert = parseInt(currentValue);
-    var final = JSON.stringify(convert);
-    // console.log("text content of final = " + final.textContent);
-    var almost = ("answer" + final);
-    console.log("almost there... " + almost);
-    // console.log(almost.textContent);
-    // console.log("this is my answer + " + final);
-    // console.log("THIS IS THE ID " + currentValue);
-    // localStorage.setItem("Id", currentValue);
-    start(final);
-    // console.log("this is the answer you selected: " + currentValue.textContent);
+$("#buttons").on("click", "button", function (event) {
+    var numId = this.id;
+    var test = this.textContent;
+    console.log("TEST ID PLS IGNORE: " + numId);
+    console.log("WINRAR: " + test);
+    // calls start with the parameter of textcontent of the button
+    start(numId, test);
+
+});
+
+function checkAnswer(check, ans) {
+    var test = false;
+    console.log("Check = " + check + " Answer = " + ans);
+    if (check === ans) {
+        test = true;
+        console.log("test true = " + test);
+    } else {
+        test = false;
+        console.log("test false = " + test);
+    }
+    return test;
+
 }
 
-// function to show high scores and retain memory of top 10 winners
-
-function highScores(){
+function highScores() {
     displayStart.style.display = "none";
     question.textContent = "High Scores: ";
     // text.style.display = "block";
     // text.textContent = "High Scores List";
 }
 
+var timeElapsed = 0;
+function timer(seconds) {
+
+    function time() {
+        var timer = document.getElementById("timer");
+        timeElapsed++;
+        seconds--;
+        timer.innerHTML = seconds;
+        if (seconds > 0) {
+            setTimeout(time, 1000);
+        } else {
+            // alert("Time's up!");
+            return seconds;
+        }
+    }
+    time();
+}
 
 
+startQuiz.addEventListener("click", start);
 
-// function checkAnswer(check){
-//     if(check.textContent = correct[i]){
 
-//     }
-//  return;
+// old id grabber on click
+// trying to get this function to take textContent of whichever id is pressed and return it
+
+// gets id of button pressed
+// function testClick(clicked_id) {
+//     var currentValue = clicked_id;
+//     var convert = parseInt(currentValue);
+//     var final = JSON.stringify(convert);
+//     // console.log("text content of final = " + final.textContent);
+//     var almost = ("answer" + final);
+//     console.log("almost there... " + almost);
+//     // console.log(almost.textContent);
+//     // console.log("this is my answer + " + final);
+//     // console.log("THIS IS THE ID " + currentValue);
+//     // localStorage.setItem("Id", currentValue);
+//     start(final);
+//     // console.log("this is the answer you selected: " + currentValue.textContent);
 // }
+
+// function to show high scores and retain memory of top 10 winners
+
+
+
+
+
+
+
 
 
 
@@ -165,7 +229,7 @@ function highScores(){
     // answer3.addEventListener("click", answerClick);
     // answer4.addEventListener("click", answerClick);
 
-    
+
 
 
     // pull id from local storage
@@ -176,14 +240,14 @@ function highScores(){
 
 
     // end of original QuestionAnswer function
-    
+
 
 
     // if correct object is selected, score++, if incorrect, seconds - 5, then go to next question
 
 
     // } while (i < 10);
-   
+
 
 
 
@@ -246,25 +310,6 @@ function highScores(){
 //         return alert("Time is up!");
 //     }
 // }
-
-function timer(seconds) {
-    var timeElapsed = 0;
-    function time() {
-        var timer = document.getElementById("timer");
-        seconds--;
-        timer.innerHTML = seconds;
-        if (seconds > 0) {
-            setTimeout(time, 1000);
-        } else {
-            alert("Time's up!");
-            return seconds;
-        }
-    }
-    time();
-}
-
-
-startQuiz.addEventListener("click", start);
 
 
 // GIVEN I am taking a code quiz
