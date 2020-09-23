@@ -133,7 +133,8 @@ function start() {
     // show all buttons
     displayStart.style.display = "block";
     text.style.display = "none";
-    document.getElementById("start").style.display = "none";
+    startQuiz.style.display = "none";
+    // document.getElementById("start").style.display = "none";
     timer();
     nextQuestion();
 }
@@ -228,7 +229,7 @@ function highScore() {
     console.log(name);
     localStorage.setItem("score", score);
     var name = input.textContent;
-    // error checking for name
+    // error checking for name - not working
     if (name === "" || name === null) {
         alert("You must enter at least one character to save your score.");
         highScore();
