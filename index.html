@@ -30,11 +30,12 @@
 
     <!-- main start -->
     <header>
-        <h4 style="left: 5%; top: 2%; position: fixed;" id="highScore">View High Scores!</section>
-        <h4 style="right: 5%; top: 2%; position: fixed;" id="timer"></section>
+        <h4 style="left: 5%; top: 2%;" id="highScore">View High Scores!</section>
+            <h4 style="right: 5%; top: 2%; position: fixed;" id="timer">
+                </section>
     </header>
     <main class="container">
-        
+
         <!-- padding top -->
         <section style="padding: 10%;"></section>
 
@@ -42,29 +43,36 @@
         <div class="row"></div>
         <!-- <div class = "col-lg-2 p-5"></div> -->
         <form>
-            <fieldset class="form-group p-5 border border-primary">
+            <fieldset class="form-group p-5 border border-primary d-flex">
                 <div class="row">
-                    <h2 class="text-center pb-3" id="questions">Final Fantasy X Quiz!</h2>
-                    <div id="questionText" class="text-justify pb-5">Click start to begin the quiz! You will have one
-                        minute to complete and lose 5
-                        seconds for every incorrect answer!</div>
+                    <h2 class="pb-3 d-flex justify-content-center" id="questions">Final Fantasy X Quiz!
+                    </h2>
+                    <div id="questionText" class="text-justify p-5 mt-3">Click start to begin the quiz! You will have
+                        one minute to complete and lose 5 seconds for every incorrect answer!</div>
                 </div>
                 <div class="row">
+                    <div id = "input" class = "form-group">
+                        <!-- <label for="nameInput">Name</label> -->
+                        <input type="name" class = "form m-2" style = "position: absolute; margin: 20px;" id="nameInput" placeholder="Name">
+                        <button id = "submit" type="submit" class="btn btn-primary position-relative float-left">Submit</button>
+                    </div>
                     <button id="start" type="button" class="btn btn-secondary">Start</button>
                     <div id="buttons" class="col-lg-10">
                         <div>
-                            <button id="1" type="button" value = 1 class="answer btn btn-secondary">1</button>
+                            <button id="1" type="button" value=1 class="answer btn btn-secondary">1</button>
                             <div class="p-1"></div>
                             <!-- onclick="testClick(this.id)" taken out of button -->
-                            <button id="2" type="button" value = 2 class="answer btn btn-secondary">2</button>
+                            <button id="2" type="button" value=2 class="answer btn btn-secondary">2</button>
                             <div class="p-1"></div>
-                            <button id="3" type="button" value = 3 class="answer btn btn-secondary">3</button>
+                            <button id="3" type="button" value=3 class="answer btn btn-secondary">3</button>
                             <div class="p-1"></div>
-                            <button id="4" type="button" value = 4 class="answer btn btn-secondary">4</button>
+                            <button id="4" type="button" value=4 class="answer btn btn-secondary">4</button>
                             <div class="pb-3"></div>
                             <div id="checker"></div>
                         </div>
-                        <div id="Scores"><ul></ul></div>
+                        <div id="Scores">
+                            <ul></ul>
+                        </div>
                     </div>
                 </div>
             </fieldset>
@@ -77,8 +85,3 @@
 </body>
 
 </html>
-
-
-
-
-
