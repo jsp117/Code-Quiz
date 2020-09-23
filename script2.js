@@ -108,14 +108,14 @@ const text = document.getElementById("questionText");
 const input = document.getElementById("input");
 const submit = document.getElementById("submit");
 const displayStart = document.getElementById("buttons");
-const answer1 = document.getElementById("1");
-const answer2 = document.getElementById("2");
-const answer3 = document.getElementById("3");
-const answer4 = document.getElementById("4");
+// const answer1 = document.getElementById("1");
+// const answer2 = document.getElementById("2");
+// const answer3 = document.getElementById("3");
+// const answer4 = document.getElementById("4");
 const checker = document.getElementById("checker");
 
 // Game time
-var seconds = 5;
+var seconds = 180;
 const answers = document.getElementsByClassName("answer");
 console.log(answers);
 
@@ -140,7 +140,7 @@ function start() {
 }
 
 function nextQuestion() {
-    if (seconds >= 1) {
+    if (seconds >= 1 && count < 10) {
         display();
     } else {
         highScore();
@@ -173,7 +173,7 @@ function timer() {
         seconds--;
         timer.innerHTML = seconds;
         // stops timer at 0
-        if (seconds > 0) {
+        if (seconds > 0 && count < 10) {
             // set Timeout - time it waits before running again
             setTimeout(time, 1000);
         } else {
