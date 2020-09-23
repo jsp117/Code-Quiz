@@ -42,19 +42,20 @@
         <section style="padding: 10%;"></section>
 
         <!-- form row start -->
-        <div class="row"></div>
         <!-- <div class = "col-lg-2 p-5"></div> -->
         <form style="background-color: white;">
-            <fieldset class="form-group p-5 border border-primary">
+            <fieldset class="card p-5 border border-primary">
                 <div class="row">
                     <div class=col-lg-1></div>
                     <h2 class="mb-3 d-flex justify-content-center col-lg-10" id="questions">Final Fantasy X Quiz!
                     </h2>
+                    <ul id="scores"></ul>
                     <div class="col-lg-1"></div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2 p-2"></div>
-                    <div id="questionText" class="text-justify justify-content-center p-5 m-3">Click start to begin the quiz! You will
+                    <div id="questionText" class="text-justify justify-content-center p-5 m-3">Click start to begin the
+                        quiz! You will
                         have
                         one minute to complete and lose 5 seconds for every incorrect answer!</div>
 
@@ -63,30 +64,29 @@
                     <div class="col-sm-4 p-2 ml-5"></div>
                     <div class="col-sm-6">
                         <button id="start" type="button" class="p-3 ml-5 btn btn-secondary">Start</button>
-                        <div id="input" class="form-group">
-
+                        <div id="input" style="padding:50px;" class="form-group">
                             <!-- <label for="nameInput">Name</label> -->
-                            <input type="name" class="form m-2" style="position: absolute; margin: 20px;" id="nameInput"
-                                placeholder="Name">
-                            <button id="submit" type="submit"
-                                class="btn btn-primary position-relative float-right">Submit</button>
+                            <input type="text" class="m-2" style="margin: 20px;" id="nameInput"
+                                placeholder="Enter your initials">
+                            <button id="submit" type="button"
+                                class="btn btn-primary position-relative float-right ml-5">Submit</button>
                         </div>
-                    
-                    <!-- <div class="row"> -->
+
+                        <!-- <div class="row"> -->
                         <!-- col-lg-6 taken from div id buttons -->
                         <div id="buttons">
-                            
-                                <button id="1" type="button" value=1 class="answer btn btn-secondary">1</button>
-                                <div class="p-1"></div>
-                                <!-- onclick="testClick(this.id)" taken out of button -->
-                                <button id="2" type="button" value=2 class="answer btn btn-secondary">2</button>
-                                <div class="p-1"></div>
-                                <button id="3" type="button" value=3 class="answer btn btn-secondary">3</button>
-                                <div class="p-1"></div>
-                                <button id="4" type="button" value=4 class="answer btn btn-secondary">4</button>
-                                <div class="pb-3"></div>
-                                <div id="checker"></div>
-                            
+
+                            <button id="1" type="button" value=1 class="answer btn btn-secondary">1</button>
+                            <div class="p-1"></div>
+                            <!-- onclick="testClick(this.id)" taken out of button -->
+                            <button id="2" type="button" value=2 class="answer btn btn-secondary">2</button>
+                            <div class="p-1"></div>
+                            <button id="3" type="button" value=3 class="answer btn btn-secondary">3</button>
+                            <div class="p-1"></div>
+                            <button id="4" type="button" value=4 class="answer btn btn-secondary">4</button>
+                            <div class="pb-3"></div>
+                            <div id="checker"></div>
+
                             <!-- <div id="Scores">
                                 <ul></ul>
                             </div> -->

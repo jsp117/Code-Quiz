@@ -109,15 +109,22 @@ const questions = [
 // attach variables to each id being used
 const startQuiz = document.getElementById("start");
 const question = document.getElementById("questions");
+const scoreId = document.getElementById("scores");
 const text = document.getElementById("questionText");
 const input = document.getElementById("input");
 const submit = document.getElementById("submit");
 const displayStart = document.getElementById("buttons");
 const checker = document.getElementById("checker");
 const music = document.getElementById("music");
+var enterName = document.getElementById("nameInput").value;
+console.log(enterName);
+
+// high score holder
+var scores = [];
+
 
 // Game time
-var seconds = 180;
+var seconds = 2;
 const answers = document.getElementsByClassName("answer");
 console.log(answers);
 
@@ -136,7 +143,7 @@ function start() {
     displayStart.style.display = "block";
     text.style.display = "none";
     startQuiz.style.display = "none";
-    
+
     // start music
     music.play();
 
@@ -219,47 +226,51 @@ for (var i = 0; i < answers.length; i++) {
 function highScore() {
     document.body.style.backgroundImage = "url('Assets/endbackground.jpg')";
     displayStart.style.display = "none";
-
-    // question.style.display = "none";
-    if (seconds > 0) {
-        text.style.display = "block";
-        text.textContent = "Congratulations! Please enter your name: ";
-    } else {
-        text.style.display = "block";
-        text.textContent = "Nice try! Please Enter your name: ";
-    }
-
     question.textContent = "Game Over";
     input.style.display = "block";
-    var score = seconds;
-    console.log(name);
-    localStorage.setItem("score", score);
-    var name = input.textContent;
-    // error checking for name - not working
-    if (name === "" || name === null) {
-        alert("You must enter at least one character to save your score.");
-        highScore();
-    } else {
-        localStorage.setItem("name", name);
-        displayScore();
-    }
+    // localStorage.setItem("score", seconds);
+}
+function submitName() {
+    var name = document.getElementById("nameInput").value;
+    // localStorage.setItem("name", JSON.stringify(name));
+    localStorage.setItem("highscores", "Name: " + name + " Score: " + seconds);
+    displayScore();
+}
+
+function displayScore(){
+    question.textContent = "High Scores";
+    input.style.display = "none";
+    scores = localStorage.getItem("highscores");
+    console.log(scores);
+    var li = document.createElement("li");
+    var reset = document.createElement("button");
+    scoreId.appendChild(li);
+    scoreId.appendChild(reset);
+    li.textContent = scores;
+    reset.textContent = "Restart";
+
+
+    // scores = 
+    // for(var i = 0; i<scores.length;i++){
+    // }
 }
 
 // create display score function
-function displayScore(event) {
-    event.preventDefault();
-    var create = document.createElement("div");
-    text.appendChild(create);
-    // create.setAttribute("style", "text-align: center; font-size: 50px;");
-    // var winners = JSON.parse(localStorage.getItem("name", "score"));
-    // console.log(winners);
-    create.textContent = "1st Place: " + name + " Score: " + score;
-}
+// function displayScore(event) {
+//     event.preventDefault();
+//     var create = document.createElement("div");
+//     text.appendChild(create);
+//     // create.setAttribute("style", "text-align: center; font-size: 50px;");
+//     // var winners = JSON.parse(localStorage.getItem("name", "score"));
+//     // console.log(winners);
+//     create.textContent = "1st Place: " + name + " Score: " + score;
+// }
 
 
 
 // event listener for start button
 startQuiz.addEventListener("click", start);
 // event handler for submit button
-submit.addEventListener("submit", displayScore);
+submit.addEventListener("click", submitName);
+
 
