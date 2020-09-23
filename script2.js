@@ -101,6 +101,11 @@ const questions = [
         correct: "Jecht"
     }];
 
+// const answer1 = document.getElementById("1");
+// const answer2 = document.getElementById("2");
+// const answer3 = document.getElementById("3");
+// const answer4 = document.getElementById("4");
+
 // attach variables to each id being used
 const startQuiz = document.getElementById("start");
 const question = document.getElementById("questions");
@@ -108,11 +113,8 @@ const text = document.getElementById("questionText");
 const input = document.getElementById("input");
 const submit = document.getElementById("submit");
 const displayStart = document.getElementById("buttons");
-// const answer1 = document.getElementById("1");
-// const answer2 = document.getElementById("2");
-// const answer3 = document.getElementById("3");
-// const answer4 = document.getElementById("4");
 const checker = document.getElementById("checker");
+const music = document.getElementById("music");
 
 // Game time
 var seconds = 180;
@@ -134,7 +136,10 @@ function start() {
     displayStart.style.display = "block";
     text.style.display = "none";
     startQuiz.style.display = "none";
-    // document.getElementById("start").style.display = "none";
+    
+    // start music
+    music.play();
+
     timer();
     nextQuestion();
 }
@@ -212,6 +217,7 @@ for (var i = 0; i < answers.length; i++) {
 
 // function to display high scores - save to local storage
 function highScore() {
+    document.body.style.backgroundImage = "url('Assets/endbackground.jpg')";
     displayStart.style.display = "none";
 
     // question.style.display = "none";
@@ -222,7 +228,7 @@ function highScore() {
         text.style.display = "block";
         text.textContent = "Nice try! Please Enter your name: ";
     }
-    
+
     question.textContent = "Game Over";
     input.style.display = "block";
     var score = seconds;
@@ -240,8 +246,8 @@ function highScore() {
 }
 
 // create display score function
-function displayScore() {
-    
+function displayScore(event) {
+    event.preventDefault();
     var create = document.createElement("div");
     text.appendChild(create);
     // create.setAttribute("style", "text-align: center; font-size: 50px;");
@@ -256,3 +262,4 @@ function displayScore() {
 startQuiz.addEventListener("click", start);
 // event handler for submit button
 submit.addEventListener("submit", displayScore);
+
