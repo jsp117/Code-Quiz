@@ -7,9 +7,8 @@ const questions = [
             b: "Ixion",
             c: "Valefor",
             d: "Bahamut"
-
         },
-        correct: "c"
+        correct: "Valefor"
     },
     {
         question: "What is the name of Tidus' father?",
@@ -19,7 +18,7 @@ const questions = [
             c: "Auron",
             d: "Kimahri"
         },
-        correct: "a"
+        correct: "Jecht"
     },
     {
         question: "What is the name of Seymour's Aeon/mother?",
@@ -29,7 +28,7 @@ const questions = [
             c: "Yunalesca",
             d: "Anima"
         },
-        correct: "d"
+        correct: "Anima"
     },
     {
         question: "What is the name of the sport popular in Zanarkand?",
@@ -39,7 +38,7 @@ const questions = [
             c: "Otedama",
             d: "Baseball"
         },
-        correct: "b"
+        correct: "Blitzball"
     },
     {
         question: "What were the name's of Yuna's first three guardians?",
@@ -49,7 +48,7 @@ const questions = [
             c: "Wakka, Lulu, and Kimahri",
             d: "Tidus, Rikku, and Paine"
         },
-        correct: "c"
+        correct: "Wakka, Lulu, and Kimahri"
     },
     {
         question: "What race is Rikku?",
@@ -59,7 +58,7 @@ const questions = [
             c: "Al Bhed",
             d: "Besaid"
         },
-        correct: "c"
+        correct: "Al Bhed"
     },
     {
         question: "What are the Al Bhed hated for?",
@@ -69,7 +68,7 @@ const questions = [
             c: "Hunting sacred monsters",
             d: "War with Spira"
         },
-        correct: "a"
+        correct: "Creating and using machines"
     },
     {
         question: "What is the name of Tidus' mysterious friend/mentor?",
@@ -79,7 +78,7 @@ const questions = [
             c: "Jecht",
             d: "Auron"
         },
-        correct: "d"
+        correct: "Auron"
     },
     {
         question: "What is the name of the monster destroying Spira?",
@@ -89,7 +88,7 @@ const questions = [
             c: "Sin",
             d: "Bahamut"
         },
-        correct: "c"
+        correct: "Sin"
     },
     {
         question: "What is Sin's true identity?",
@@ -99,8 +98,9 @@ const questions = [
             c: "Yunalesca",
             d: "Auron"
         },
-        correct: "b"
+        correct: "Jecht"
     }];
+
 // attach variables to each id being used
 const displayStart = document.getElementById("buttons");
 const startQuiz = document.getElementById("start");
@@ -110,10 +110,12 @@ const answer2 = document.getElementById("2");
 const answer3 = document.getElementById("3");
 const answer4 = document.getElementById("4");
 var text = document.getElementById("questionText");
-var timeElapsed = 0;
 var seconds = 180;
 
-// new
+var answers = document.getElementsByClassName("answer");
+// console.log(answers);
+
+
 // container for questions to display
 var container = [];
 var count = 0;
@@ -127,51 +129,83 @@ function start(check) {
     text.style.display = "none";
     document.getElementById("start").style.display = "none";
     timer();
-    display(count);
-    count++;
+    nextQuestion();
+}
+
+function nextQuestion() {
+    if(seconds == 0){
+        alert("Time's up!");
+        highScore();
+    }
+    if(count == 10){
+        alert("Good job!");
+        highScore();
+    }
+    display();
+
 }
 
 
-function display(count) {
-    
+function display() {
 
-
-    // var quesText = questions[i].question;
-
-    for (let i = 0; i < questions.length; i++) {
-        let answerArray = questions[i].question;
-        for (let j = 0; j < answerArray.length; j++) {
-            console.log(answerArray[j]);
-        }
-    }
-
-
-
-    // var ansText = questions[i].answer[i];
-    // console.log(ansText);
-    console.log(question);
+    var quesText = questions[count].question;
     question.textContent = quesText;
 
+    answer1.innerText = questions[count]["answer"]["a"];
+    answer2.innerText = questions[count]["answer"]["b"];
+    answer3.innerText = questions[count]["answer"]["c"];
+    answer4.innerText = questions[count]["answer"]["d"];
+
 }
 
-function timer(seconds) {
-
+// set timeout in a recursive loop
+function timer() {
     function time() {
         var timer = document.getElementById("timer");
-        timeElapsed++;
+        // timeElapsed++;
         seconds--;
         timer.innerHTML = seconds;
         if (seconds > 0) {
+            // time it waits before running again
             setTimeout(time, 1000);
         } else {
             // alert("Time's up!");
             return seconds;
         }
     }
+    // calls function again after completing
     time();
 }
 
 
+// iterate through array - list out all event handlers and return to start
+for (var i = 0; i < answers.length; i++) {
+    answers[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        // check correct answer - add to counter - call next question
+        if (event.target.innerText == questions[count]["correct"]) {
+            count++;
+            nextQuestion();
+            // console.log(event.target.innerText == questions[count]["correct"]);
+        } else {
+            // if wrong - subtract 5 seconds, add to count, call next question
+            seconds = seconds - 5;
+            count++;
+            nextQuestion();
+            // console.log(event.target.innerText == questions[count]["correct"]);
+        }
+    })
+}
+
+// function to display high scores - save to local storage
+function highScore(){
+    displayStart.style.display = "none";
+    text.style.display = "block";
+    text.textContent = "Congratulations! Here are the high scores: ";
+    question.textContent = "High Scores";
+    var score = seconds;
+
+}
 
 
 
