@@ -10,7 +10,7 @@ var text = document.getElementById("questionText");
 let possible = [];
 // var answerId = "";
 let i = 0;
-
+// set up object for questions and answers or array of objects 
 const questions = ["question 1", "question 2", "question 3", "question 4", "question 5", "question 6", "question 7", "question 8", "question 9", "question 10"];
 const answers = ["answer 1", "answer 2", "answer 3", "answer 4", "answer 5", "answer 6", "answer 7", "answer 8", "answer 9",];
 const correct = ["correct 1", "correct 2", "correct 3", "correct 4", "correct 5", "correct 6", "correct 7", "correct 8", "correct 9", "correct 10"];
@@ -196,20 +196,21 @@ startQuiz.addEventListener("click", start);
 // trying to get this function to take textContent of whichever id is pressed and return it
 
 // gets id of button pressed
-// function testClick(clicked_id) {
-//     var currentValue = clicked_id;
-//     var convert = parseInt(currentValue);
-//     var final = JSON.stringify(convert);
-//     // console.log("text content of final = " + final.textContent);
-//     var almost = ("answer" + final);
-//     console.log("almost there... " + almost);
-//     // console.log(almost.textContent);
-//     // console.log("this is my answer + " + final);
-//     // console.log("THIS IS THE ID " + currentValue);
-//     // localStorage.setItem("Id", currentValue);
-//     start(final);
-//     // console.log("this is the answer you selected: " + currentValue.textContent);
-// }
+function testClick(clicked_id) {
+    var currentValue = clicked_id;
+    console.log("current value = " + currentValue);
+    var convert = parseInt(currentValue);
+    var final = JSON.stringify(convert);
+    // console.log("text content of final = " + final.textContent);
+    var almost = ("answer" + final);
+    console.log("almost there... " + almost);
+    // console.log(almost.textContent);
+    // console.log("this is my answer + " + final);
+    // console.log("THIS IS THE ID " + currentValue);
+    // localStorage.setItem("Id", currentValue);
+    start(final);
+    // console.log("this is the answer you selected: " + currentValue.textContent);
+}
 
 // function to show high scores and retain memory of top 10 winners
 
