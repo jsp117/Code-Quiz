@@ -1,6 +1,9 @@
 body{
-    /* background image by Greg Rakozy */
     background-image: url("Assets/startbackground.jpg");
     background-size: cover;
-    /* overflow: hidden; */
+}
+
+li{
+    display: block;
+
 }

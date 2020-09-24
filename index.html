@@ -46,30 +46,32 @@
         <form style="background-color: white;">
             <fieldset class="card p-5 border border-primary">
                 <div class="row">
-                    <div class=col-lg-1></div>
-                    <h2 class="mb-3 d-flex justify-content-center col-lg-10" id="questions">Final Fantasy X Quiz!
-                    </h2>
-                    <ul id="scores"></ul>
+                    <!-- <div class=col-lg-1></div> -->
+                    <div class=col-lg-12>
+                        <h2 class="mb-3 d-flex justify-content-center" id="questions">Final Fantasy X Quiz!
+                        </h2>
+                        <ul class="mt-5 list-inline d-flex justify-content-center" id="scores"></ul>
+                        <div id="restart" class="list-inline d-flex justify-content-center"></div>
+                    </div>
                     <div class="col-lg-1"></div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2 p-2"></div>
-                    <div id="questionText" class="text-justify justify-content-center p-5 m-3">Click start to begin the
+                <div class="row text-justify">
+                    <div class="col-sm-2"></div>
+                    <div id="questionText" class="col-sm-8 text-justify justify-content-center p-5 m-3">Click start to
+                        begin the
                         quiz! You will
                         have
-                        one minute to complete and lose 5 seconds for every incorrect answer!</div>
-
+                        two minutes to complete and lose 5 seconds for every incorrect answer!</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4 p-2 ml-5"></div>
-                    <div class="col-sm-6">
-                        <button id="start" type="button" class="p-3 ml-5 btn btn-secondary">Start</button>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center">
+                        <button id="start" type="button" class="p-3 btn btn-secondary">Start</button>
                         <div id="input" style="padding:50px;" class="form-group">
                             <!-- <label for="nameInput">Name</label> -->
                             <input type="text" class="m-2" style="margin: 20px;" id="nameInput"
                                 placeholder="Enter your initials">
-                            <button id="submit" type="button"
-                                class="btn btn-primary position-relative float-right ml-5">Submit</button>
+                            <button id="submit" type="button" class="btn btn-primary">Submit</button>
                         </div>
 
                         <!-- <div class="row"> -->
@@ -87,9 +89,6 @@
                             <div class="pb-3"></div>
                             <div id="checker"></div>
 
-                            <!-- <div id="Scores">
-                                <ul></ul>
-                            </div> -->
                         </div>
                     </div>
                     <!-- </div> -->
@@ -102,7 +101,7 @@
         </audio>
 
     </main>
-    <script src="./script2.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
