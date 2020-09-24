@@ -227,7 +227,7 @@ for (var i = 0; i < answers.length; i++) {
 
 // function to display high scores - save to local storage
 function highScore() {
-    document.body.style.backgroundImage = "url('Assets/endbackground.jpg')";
+    document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/jsp117/Code-Quiz/master/assets/endbackground.jpg')";
     displayStart.style.display = "none";
     question.textContent = "Game Over";
     input.style.display = "block";
