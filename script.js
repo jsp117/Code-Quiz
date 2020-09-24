@@ -119,10 +119,11 @@ const checker = document.getElementById("checker");
 const music = document.getElementById("music");
 // var enterName = document.getElementById("nameInput").value;
 
+// correct answers
+var cor = 0;
 
 // high score holder
 var scores = [];
-
 
 // Game time
 var seconds = 0;
@@ -142,6 +143,7 @@ input.style.display = "none";
 function start() {
     seconds = 120;
     count = 0;
+    cor = 0;
     // show all buttons
     displayStart.style.display = "block";
     text.style.display = "none";
@@ -167,15 +169,9 @@ function display() {
     var letters = ["a", "b", "c", "d"];
     var quesText = questions[count].question;
     question.textContent = quesText;
-    // // iterate through questions with index count
-    // questions[count][answers][answer index]
-    // answer1.innerText = questions[count]["answer"]["a"];
-    // answer2.innerText = questions[count]["answer"]["b"];
-    // answer3.innerText = questions[count]["answer"]["c"];
-    // answer4.innerText = questions[count]["answer"]["d"];
 
-    // test button text filler
     for (i = 0; i < answers.length; i++) {
+        // iterate through questions with index count
         answers[i].innerText = questions[count]["answer"][letters[i]];
     }
 }
@@ -184,14 +180,14 @@ function display() {
 function timer() {
     function time() {
         var timer = document.getElementById("timer");
+        console.log(seconds);
         seconds--;
         timer.innerHTML = seconds;
         // stops timer at 0
         if (seconds > 0 && count < 10) {
-            // set Timeout - time it waits before running again
+            // set Timeout - time it waits before running again - while seconds > 0
             setTimeout(time, 1000);
         } else {
-            // alert("Time's up!");
             highScore();
         }
     }
@@ -200,13 +196,14 @@ function timer() {
 }
 
 
-// iterate answer length - create event handlers = number of answers
+// iterate for i < number of buttons - create event handlers
 for (var i = 0; i < answers.length; i++) {
     answers[i].addEventListener("click", function (event) {
         event.preventDefault();
         // targets clicked event - check if correct against question[count] correct answer - add to counter - call next question
         if (event.target.innerText == questions[count]["correct"]) {
             count++;
+            cor++;
             checker.textContent = "Correct!";
             nextQuestion();
             // console.log(event.target.innerText == questions[count]["correct"]);
@@ -215,10 +212,6 @@ for (var i = 0; i < answers.length; i++) {
             checker.textContent = "Incorrect!";
             seconds = seconds - 5;
             count++;
-            // if (seconds <= 0) {
-            //     alert("Time's up!");
-            //     highScore();
-            // }
             nextQuestion();
             // console.log(event.target.innerText == questions[count]["correct"]);
         }
@@ -236,7 +229,7 @@ function highScore() {
 function submitName() {
     var name = document.getElementById("nameInput").value;
     // localStorage.setItem("name", JSON.stringify(name));
-    localStorage.setItem("highscores", "Name: " + name + " Score: " + seconds);
+    localStorage.setItem("highscores", "Name: " + name + " Score: " + seconds + " Correct Answers: " + cor);
     displayScore();
 }
 
@@ -246,9 +239,7 @@ function displayScore() {
     scores = localStorage.getItem("highscores");
     console.log(scores);
     var li = document.createElement("li");
-    // li.classList.add("list-inline-item");
     var reset = document.createElement("button");
-    // reset.classList.add("list-inline-item");
     scoreId.appendChild(li);
     restart.appendChild(reset);
     li.textContent = scores;
@@ -257,37 +248,21 @@ function displayScore() {
     // restart function
     reset.addEventListener("click", function (event) {
         event.preventDefault();
-        questions.textContent = "Final Fantasy X Quiz!";
+        document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/jsp117/Code-Quiz/master/assets/startbackground.jpg')";
         displayStart.style.display = "none";
         li.style.display = "none";
         input.style.display = "none";
-        startQuiz.style.display = "block";
         reset.style.display = "none";
         scoreId.style.display = "none";
-        text.textContent = "Click start to begin the quiz! You will have two minutes to complete and lose 5 seconds for every incorrect answer!";
+        questions.textContent = "Final Fantasy X Quiz!";
         text.style.display = "block";
+        startQuiz.style.display = "block";
+        text.textContent = "Click start to begin the quiz! You will have two minutes to complete and lose 5 seconds for every incorrect answer!";
+        
         seconds = 120;
         count = 0;
     })
-
-
-    // scores = 
-    // for(var i = 0; i<scores.length;i++){
-    // }
 }
-
-// create display score function
-// function displayScore(event) {
-//     event.preventDefault();
-//     var create = document.createElement("div");
-//     text.appendChild(create);
-//     // create.setAttribute("style", "text-align: center; font-size: 50px;");
-//     // var winners = JSON.parse(localStorage.getItem("name", "score"));
-//     // console.log(winners);
-//     create.textContent = "1st Place: " + name + " Score: " + score;
-// }
-
-
 
 // event listener for start button
 startQuiz.addEventListener("click", start);
