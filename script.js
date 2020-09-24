@@ -111,10 +111,10 @@ const restart = document.getElementById("restart");
 const text = document.getElementById("intro");
 const input = document.getElementById("input");
 const submit = document.getElementById("submit");
-// const buttons = document.getElementById("buttons");
+const answers = document.getElementsByClassName("answer");
 const checker = document.getElementById("checker");
 const music = document.getElementById("music");
-const answers = document.getElementsByClassName("answer");
+
 
 // correct answers
 var cor = 0;
@@ -165,8 +165,16 @@ function display() {
     var letters = ["a", "b", "c", "d"];
     var quesText = questions[count].question;
     question.textContent = quesText;
+    
+    // shuffle letters for different answer order each playthrough
+    for (var i = 0; i < letters.length; i++) {
+        var x = Math.floor(Math.random() * i);
+        var y = letters[i];
+        letters[i] = letters[x];
+        letters[x] = y;
+    }
 
-    for (i = 0; i < answers.length; i++) {
+    for (var i = 0; i < answers.length; i++) {
         // iterate through questions with index count
         answers[i].innerText = questions[count]["answer"][letters[i]];
     }
