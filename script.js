@@ -114,23 +114,13 @@ const submit = document.getElementById("submit");
 const answers = document.getElementsByClassName("answer");
 const checker = document.getElementById("checker");
 const music = document.getElementById("music");
-
-
-// correct answers
 var cor = 0;
-
-// high score holder
 var scores = [];
-
-// Game time
 var seconds = 0;
-
-// console.log(answers);
-
-
-// container for questions to display
-var container = [];
 var count = 0;
+
+// set music volume
+music.volume = 0.5;
 
 // hide quiz buttons and input
 buttons.style.display = "none";
@@ -165,7 +155,7 @@ function display() {
     var letters = ["a", "b", "c", "d"];
     var quesText = questions[count].question;
     question.textContent = quesText;
-    
+
     // shuffle letters for different answer order each playthrough
     for (var i = 0; i < letters.length; i++) {
         var x = Math.floor(Math.random() * i);
