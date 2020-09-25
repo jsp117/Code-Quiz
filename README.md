@@ -26,7 +26,7 @@ This application is a Final Fantasy X quiz. When the user presses start to begin
 * [Github](https://github.com/)
 
 ## Deployed_Link
-[Final Fantasy X Quiz](https://jsp117.github.io/Code-Quiz/)
+[Final Fantasy X Quiz](https://jsp117.github.io/Final-Fantasy-X-Quiz/)
 
 ## Author
 Jonathan SanPedro - Bachelors of Information Technology Rutgers New Brunswick - Student at Berkeley Coding Bootcamp
